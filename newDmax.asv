@@ -1,0 +1,18 @@
+
+randomGraph = randomGraph(100, 1, 300);
+dmax =   maxDegree(randomGraph);
+
+
+min = 0;
+step = 1;
+max = round(dmax/2);
+
+line1x = min:step:max;
+line1y = zeros (1, floor((max-min)/step) + 1);
+
+counter = 1;
+for i = min:step:max
+    P_ctrw = transMatrCTRD(randomGraph, (dmax - i));
+    eign = secondLargeEign(P_ctrw);
+    line1y(counter)
+end

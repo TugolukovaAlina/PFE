@@ -1,6 +1,6 @@
-function [methods, discardTime, restartTime] = methodsOnGraph(graph, methods)
+function [PofMethods, mixingTime, discardTime, restartTime] = methodsOnGraph(graph, methods, parameters)
 
-if argin == 1
+if nargin == 1
     methods = [1, 2, 3, 4];
 end
 pi = 1/length(graph);
@@ -10,41 +10,47 @@ omega = length(graph);
 methodNames = cellstr(['Metropolis';'LD        ';'CTRW      '; 'RW        ']);
 discardTime = zeros(1, length(methodNames));
 restartTime = zeros(1, length(methodNames));
+mixingTime = zeros(1, length(methodNames));
        
     if(issparse(graph))
         P1 = transMatrMetropolisSparse(graph);
         P2 = transMatrLDSparse(graph);
         P3 = transMatrCTRDSparse(graph);
         P4 = transMatrRWSparse(graph);
-        methods = cat(3, full(P1), full(P2), full(P3), full(P4));
+        PofMethods = cat(3, full(P1), full(P2), full(P3), full(P4));
     else
         P1 = transMatrMetropolis(graph);
         P2 = transMatrLD(graph);
         P3 = transMatrCTRD(graph);
         P4 = transMatrRW(graph);
-        methods = cat(3, P1, P2, P3, P4);
+        PofMethods = cat(3, P1, P2, P3, P4);
     end
 
     for i = 1:length(methods)
         
+        methodNumber = methods(i);
         if(issparse(graph))
-            P = sparse(methods(:, :, methodNum));
+            P = sparse(PofMethods(:, :, methodNumber));
         else
-            P = methods(:, :, i);
+            P = PofMethods(:, :, methodNumber);
         end
         eignValue = secondLargeEign(P);
         delta = maxDegree(P);
-        fprintf('Method:  %s \n', char(methodNames(i)));
+        fprintf('Method:  %s \n', char(methodNames(methods(i))));
         fprintf('eigen value:  %i \n', eignValue);
         fprintf('min mix time: %i \n' , minMixingTime(eignValue, omega, delta));
         fprintf('max mix time:%i \n', maxMixingTime(eignValue, pi));
         
-        discardTime(i) = toDiscardAvg(P);
-        restartTime(i) = toRestartAvg(P);
-               
-        fprintf('average number to discard: %i \n' , discardTime(i));
-        fprintf('average number to restart:%i \n', restartTime(i));
         
+        mixingTime(i) = findMixingTime(P);
+        fprintf('mixing time:%i \n', mixingTime(i));
+        
+        discardTime(i) = toDiscardAvg(P);
+        fprintf('average number to discard: %i \n' , discardTime(i));
+        
+        restartTime(i) = toRestartAvg(P);
+        fprintf('average number to restart:%i \n', restartTime(i));
+           
         fprintf('--------------------------------------------------------------------------------\n');
     end
     

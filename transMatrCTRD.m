@@ -1,6 +1,9 @@
-function P = transMatrCTRD (adj)
+function P = transMatrCTRD (adj, dmax)
 
-dmax = maxDegree(adj);
+if nargin == 1
+    dmax = maxDegree(adj);
+end
+
 num = numNodes(adj);
 P = zeros(num);
 for i = 1:num

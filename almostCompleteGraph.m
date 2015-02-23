@@ -27,10 +27,12 @@ while i <= floor(size*(size-1)*fraction/2)
     %if graph is not connected after removing chosen edge, put it back
      graph = removeEdge(graph, vertex1, vertex2);
      i = i + 1;
-%    if ~isConnected(graph)
-%        graph = addEdge(graph, vertex1, vertex2);
-%        i = i - 1;
-%    end
+     
+     %comment nest 4 lines to increase performance
+   if ~isConnected(graph)
+       graph = addEdge(graph, vertex1, vertex2);
+       i = i - 1;
+   end
    
    
    %if graph is tree no edges can be removed

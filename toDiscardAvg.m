@@ -1,14 +1,19 @@
-function answer = toDiscardAvg(P, experimentNumber)
+function answer = toDiscardAvg(P, mixingTime, experimentNumber)
 %UNTITLED5 Summary of this function goes here
 %   Detailed explanation goes here
 
-if nargin ==1
+if nargin == 1
+    mixingTime =  findMixingTime(P);
+end
+
+if nargin <= 2
     experimentNumber = 10;
 end
 
-mixingTime =  mixingTimeAvg(P);
-fprintf('average mixingTime:%i \n', mixingTime);
-mixingTime = ceil(mixingTime);
+
+
+%mixingTime =  findMixingTime(P);
+%fprintf('mixingTime:%i \n', mixingTime);
 
 values = zeros(1, experimentNumber);
 for i = 1:experimentNumber

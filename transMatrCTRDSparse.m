@@ -1,10 +1,13 @@
-function P = transMatrCTRDSparse (adj)
+function P = transMatrCTRDSparse (adj, dmax)
 
+if nargin == 1
+    dmax = maxDegreeSparse(adj);
+end
 numberOfStates = numNodes(adj);
 numberOfEdges = nnz(adj)/2;
 [nodei, nodej] = find(adj);
 num = length (nodei); 
-dmax = maxDegreeSparse(adj);
+
 
 % number of edges plus diag elements
 indexi = zeros(num + numberOfStates, 1);
