@@ -19,10 +19,10 @@ for p = min:step:max
         fprintf('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!not connected!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         break;
     else       
-        [~, eignValues] = methodsOnGraph(graph, [1, 2, 3], 1);
-        line1y(counter) = 1 - eignValues(1);
-        line2y(counter) = 1 - eignValues(2);
-        line3y(counter) = 1 - eignValues(3);
+        [~, ~, mixingTime] = methodsOnGraph(graph, [1, 2, 3], 2);
+        line1y(counter) = mixingTime(1);
+        line2y(counter) = mixingTime(2);
+        line3y(counter) = mixingTime(3);
 
         counter = counter + 1;
     end
@@ -31,4 +31,4 @@ end
 plot(line1x, line1y, 'r', line1x, line2y, 'g',  line1x, line3y, 'b');
 legend('Metropolis', 'Local Degree', 'Max Degree');
 xlabel ('probability p');
-ylabel ('spectral gap');
+ylabel ('mixing time');

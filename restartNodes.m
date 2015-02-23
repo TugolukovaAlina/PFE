@@ -1,8 +1,8 @@
 %dependency number of edges and mixing time
 %almostConnectedGraph
-min = 0.04;
-step = 0.04;
-max = 1;
+min = 100;
+step = 100;
+max = 700;
 
 line1x = min:step:max;
 line1y = zeros (1, floor((max-min)/step) + 1);
@@ -15,7 +15,13 @@ numberOfExperiments = 1;
 for j = 1:numberOfExperiments
     counter = 1;
     for i = min:step:max
-        graph = almostCompleteGraph(100, (1-i));
+        
+        p = findMinProbER(i, 0.98);
+        graph = randomGraph(i, round(i*(i-1)*p/2));
+        
+        if ~isConnected(graph)
+                fprintf('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!not connected!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+        end
 
         [~, ~, ~, discardTime, restartTime] = methodsOnGraph(graph, 2, [3, 4]);
 

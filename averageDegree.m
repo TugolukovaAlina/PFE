@@ -12,6 +12,8 @@
 
 function k=averageDegree(adj)
 
-k=2*numEdges(adj)/numNodes(adj);
+%k=2*numEdges(adj)/numNodes(adj);
+
+k=sum(sum(adj))/length(adj);
 
 end

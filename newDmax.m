@@ -13,8 +13,10 @@ line1y = zeros (1, floor((max-min)/step) + 1);
 counter = 1;
 for i = min:step:max
     P_ctrw = transMatrCTRD(randGraph, (dmax + i));
-    line1y(counter) = secondLargeEign(P_ctrw);
+    line1y(counter) = 1 - secondLargeEign(P_ctrw);
     counter = counter + 1;
 end
 
-plot(line1x, line1y, 'r');
+plot(line1x, line1y, 'r', 'LineWidth', 3);
+xlabel('max degree error');
+ylabel('spectral gap');

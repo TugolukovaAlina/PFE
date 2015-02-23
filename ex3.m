@@ -20,7 +20,7 @@ for i = min:step:max
           graph = randomGeometricGraph(100, i);
     end
 
-    [~, discardTime, restartTime] = methodsOnGraph(graph, 1);
+    [~, ~, ~, discardTime, restartTime] = methodsOnGraph(graph, 1, [3, 4]);
     line1y(counter) = discardTime(1);
     line2y(counter) = restartTime(1);   
     

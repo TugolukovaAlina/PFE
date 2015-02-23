@@ -1,15 +1,15 @@
 %dependency number of edges and eigen values
 %almostConnectedGraph
 min = 100;
-step = 1000;
-max = 10100;
+step = 5000;
+max = 50100;
 
 line1x = min:step:max;
 line1y = zeros (1, floor((max-min)/step) + 1);
 line2y = zeros (1, floor((max-min)/step) + 1);
 line3y = zeros (1, floor((max-min)/step) + 1);
 
-p = 0.06;
+p = 0.1;
 counter = 1;
 
 numberOfExperiments = 10;
@@ -17,14 +17,7 @@ for i = min:step:max
 
    eignValues = [0, 0, 0];
     for j = 1:numberOfExperiments
-        %graph = randomGraphS(i, i*(i-1)*p/2);
-        p = findMinProbER(i, 0.95);
-        graph = randomGraphS(i, round(i*(i-1)*p/2));
-        
-        if ~isConnected(graph)
-                fprintf('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!not connected!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-        end
-        
+        graph = randomGraphS(i, 3*i);  
         v = eignMethods(graph);
         eignValues = eignValues + v;
     end
