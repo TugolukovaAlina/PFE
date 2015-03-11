@@ -13,8 +13,6 @@ line1y = zeros (1, round((max - min)/step) + 1);
 line2y = zeros (1, round((max - min)/step) + 1);
 line3y = zeros (1, round((max - min)/step) + 1);
 
-
-
 %p is probability to connect two edges
 
 for i=1:numberOfExperiments

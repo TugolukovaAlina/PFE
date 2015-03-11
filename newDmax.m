@@ -1,18 +1,18 @@
 
-randGraph = randomGraph(100, 1, 800);
+randGraph = randomGraphS(100000, 1000000);
 dmax =   maxDegree(randGraph);
 
 
 min = 0;
-step = 5;
-max = 20*dmax;
+step = 2;
+max = 20;
 
-line1x = min:step:max;
+line1x = (min + dmax):step:(max + dmax);
 line1y = zeros (1, floor((max-min)/step) + 1);
 
 counter = 1;
 for i = min:step:max
-    P_ctrw = transMatrCTRD(randGraph, (dmax + i));
+    P_ctrw = transMatrCTRDSparse(randGraph, (dmax + i));
     line1y(counter) = 1 - secondLargeEign(P_ctrw);
     counter = counter + 1;
 end
