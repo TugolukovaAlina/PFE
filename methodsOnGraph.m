@@ -8,7 +8,7 @@ pi = 1/length(graph);
 omega = length(graph);
 
 %names of methods
-methodNames = cellstr(['Metropolis';'LD        ';'CTRW      '; 'RW        ']);
+methodNames = cellstr(['Metropolis';'LD        ';'CTRW      '; 'RW        '; 'JUMP      ']);
 discardTime = zeros(1, length(methods));
 restartTime = zeros(1, length(methods));
 mixingTime = zeros(1, length(methods));
@@ -25,7 +25,8 @@ eignValue = zeros(1, length(methods));
         P2 = transMatrLD(graph);
         P3 = transMatrCTRD(graph);
         P4 = transMatrRW(graph);
-        PofMethods = cat(3, P1, P2, P3, P4);
+        P5 = transMatrJUMP(graph);
+        PofMethods = cat(3, P1, P2, P3, P4, P5);
     end
 
     for i = 1:length(methods)

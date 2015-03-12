@@ -1,0 +1,11 @@
+graph = randomGraph(100, 0.05);
+
+
+
+for alpha = 0:0.05:1
+    P = transMatrJUMP(graph, alpha);
+    fprintf('eign %i \n',secondLargeEign(P));
+end
+
+
+plot(line1x, line1y, 'r', 'LineWidth', 3);
