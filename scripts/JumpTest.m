@@ -1,9 +1,8 @@
 size = 100;
-graph = randomGraph(size, 0.08);
+graph = randomGeometricGraph(size, 0.2);
+%graph = randomGraph(size, 0.08);
 
 alpha = averageDegree(graph)/8;
-
-
 
 P = transMatrJUMP(graph, alpha);
 init = [1, zeros(1, size - 1)];
